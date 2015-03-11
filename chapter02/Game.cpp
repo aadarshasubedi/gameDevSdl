@@ -2,7 +2,7 @@
 
 bool Game::init( const char* title, int xpos, int ypos, int width, int height, int flags ) {
   if( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
-    //printf( "Error - Could not initialise SDL\n" );
+    printf( "Error - Could not initialise SDL: %s\n", SDL_GetError() );
     return false; // could not in
   }
   printf( "SDL successfully initialised\n" );
@@ -12,7 +12,7 @@ bool Game::init( const char* title, int xpos, int ypos, int width, int height, i
   if( m_pWindow != 0 ) {
     printf( "window created successfully\n" );
   } else {
-    printf( "Error - Window not created\n" );
+    printf( "Error - Window not created: %s\n", SDL_GetError() );
     return false;
   }
   
@@ -22,7 +22,7 @@ bool Game::init( const char* title, int xpos, int ypos, int width, int height, i
     printf( "Renderer created successfully\n" );
     SDL_SetRenderDrawColor( m_pRenderer, 255, 255, 255, 255 );
   } else {
-    printf( "Error - Unable to start renderer\n" );
+    printf( "Error - Unable to start renderer: %s\n", SDL_GetError() );
     return false;
   }
   
