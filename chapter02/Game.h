@@ -11,7 +11,8 @@ class Game {
     bool init( const char* title, int xpos, int ypos, int width, int height, int flags );
     
     void render();
-    
+    void update();
+    void handleEvents();
     void clean();
     
     // a function to access the private running variable
