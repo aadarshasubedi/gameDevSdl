@@ -75,10 +75,10 @@ void Game::update() {
 }
 
 void  Game::render() {
-  printf( "rendering...\n" );
+  //printf( "rendering...\n" );
   SDL_RenderClear( m_pRenderer );
   //printf( "starting RenderCopy\n" );
-  SDL_RenderCopy( m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle );
+  //SDL_RenderCopy( m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle );
   SDL_RenderCopyEx( m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle, 0, 0, SDL_FLIP_HORIZONTAL );
   //SDL_RenderCopy( m_pRenderer, m_pTexture, 0, 0 );
   
