@@ -1,4 +1,4 @@
-CC=g++
+CC=clang++
 CFLAGS=-Wall -std=c++11 -std=gnu++11
 LDFLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 SOURCES=Game.cpp main.cpp
