@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "TextureManager.h"
 
 bool Game::init( const char* title, int xpos, int ypos, int width, int height, bool fullscreen ) {
 
