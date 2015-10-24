@@ -3,12 +3,15 @@
 
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
-#include<map>
+
+#include <string.h>
+#include <iostream>
+#include <map>
 
 class TextureManager {
   public:
-    TextureManager(){}
-    ~TextureManager(){}
+    //TextureManager(){}
+    //~TextureManager(){}
     
   bool load( std::string filename, std::string id, SDL_Renderer* rRenderer );
 
@@ -20,7 +23,7 @@ class TextureManager {
 
   std::map<std::string, SDL_Texture*> m_textureMap;
     
-}
+};
 
 
 #endif //TEXTURE_MANAGER_H
