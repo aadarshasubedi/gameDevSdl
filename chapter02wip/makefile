@@ -5,5 +5,5 @@ SOURCES=TextureManager.cpp Game.cpp main.cpp
 EXECUTABLE=run
 
 all:
-        $(CC) $(CFLAGS) $(SOURCES) -o $(EXECUTABLE) $(LDFLAGS)
+	$(CC) $(CFLAGS) $(SOURCES) -o $(EXECUTABLE) $(LDFLAGS)
 # g++ -Wall YOURFILENAME.cpp -o SDL_Test -lSDL2
