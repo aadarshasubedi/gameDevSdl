@@ -1,6 +1,7 @@
 #include<iostream>
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
+#include "TextureManager.h"
 
 using namespace std;
 
@@ -9,15 +10,19 @@ using namespace std;
 
 class Game {
 private:
-  SDL_Window*   m_pWindow;
-  SDL_Renderer* m_pRenderer;
-  SDL_Texture*  m_pTexture;
-  SDL_Rect      m_sourceRectangle;
-  SDL_Rect      m_destinationRectangle;
+  SDL_Window*     m_pWindow;
+  SDL_Renderer*   m_pRenderer;
   
-  SDL_Surface*  pTempSurface;
+  int             m_currentFrame;
+  TextureManager  m_textureManager;
   
-  bool          m_bRunning;
+  /*SDL_Texture*    m_pTexture;
+  SDL_Rect        m_sourceRectangle;
+  SDL_Rect        m_destinationRectangle;
+  
+  SDL_Surface*    pTempSurface;
+  */
+  bool            m_bRunning;
   
 public:
   Game(){}
@@ -49,6 +54,8 @@ public:
       return false;
     }
     
+    m_textureManager.load( "assets/animate-alpha.png", "animate", m_pRenderer );
+    /*
     //pTempSurface = SDL_LoadBMP( "assets/animate.bmp" );
     pTempSurface = IMG_Load( "assets/animate-alpha.png" );
     m_pTexture = SDL_CreateTextureFromSurface( m_pRenderer, pTempSurface );
@@ -63,7 +70,7 @@ public:
     m_destinationRectangle.y = m_sourceRectangle.y = 0;
     m_destinationRectangle.w = m_sourceRectangle.w;
     m_destinationRectangle.h = m_sourceRectangle.h;
-    
+    */
     
     
     
@@ -74,14 +81,18 @@ public:
   void render() {
     SDL_RenderClear( m_pRenderer );
     
-    SDL_RenderCopy( m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle );
+    m_textureManager.draw( "animate", 0, 0, 128, 82, m_pRenderer, SDL_FLIP_NONE );
+    m_textureManager.drawFrame( "animate", 100, 100, 128, 82, 1, m_currentFrame, m_pRenderer, SDL_FLIP_NONE );
+    
+    //SDL_RenderCopy( m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle );
     //SDL_RenderCopyEx( m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle, 0, 0, SDL_FLIP_HORIZONTAL );
     
     SDL_RenderPresent( m_pRenderer );
   }
   
   void update() {
-    m_sourceRectangle.x = 128 * int( ( ( SDL_GetTicks() / 100 ) % 6 ) );
+    m_currentFrame = int( ( ( SDL_GetTicks() / 100 ) % 6 ) );
+    //m_sourceRectangle.x = 128 * int( ( ( SDL_GetTicks() / 100 ) % 6 ) );
   }
   
   void handleEvents() {
