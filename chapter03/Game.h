@@ -3,6 +3,7 @@
 #include<SDL2/SDL_image.h>
 #include "TextureManager.h"
 #include "GameObject.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -15,17 +16,18 @@ private:
   SDL_Renderer*   m_pRenderer;
   
   int             m_currentFrame;
-  //TextureManager  m_textureManager;
   
-  /*SDL_Texture*    m_pTexture;
-  SDL_Rect        m_sourceRectangle;
-  SDL_Rect        m_destinationRectangle;
-  
-  SDL_Surface*    pTempSurface;
-  */
   bool            m_bRunning;
   GameObject      m_go;
   Player          m_player;
+  
+  GameObject*     m_player;
+  GameObject*     m_enemy1;
+  GameObject*     m_enemy2;
+  GameObject*     m_enemy3;
+  
+  std::vector<GameObject*>    m_gameObjects;
+  
   
 public:
   Game(){}
@@ -66,28 +68,26 @@ public:
     m_go.load( 100, 100, 128, 82, "animate" );
     m_player.load( 300, 300, 128, 82, "animate" );
     
-    //m_textureManager.load( "assets/animate-alpha.png", "animate", m_pRenderer );
-    /*
-    //pTempSurface = SDL_LoadBMP( "assets/animate.bmp" );
-    pTempSurface = IMG_Load( "assets/animate-alpha.png" );
-    m_pTexture = SDL_CreateTextureFromSurface( m_pRenderer, pTempSurface );
-    SDL_FreeSurface( pTempSurface );
+    m_player = new Player();
+    m_enemy1 = new Enemy();
+    m_enemy2 = new Enemy();
+    m_enemy3 = new Enemy();
     
-    //SDL_QueryTexture( m_pTexture, NULL, NULL, &m_sourceRectangle.w, &m_sourceRectangle.h );
-    
-    m_sourceRectangle.w = 128;
-    m_sourceRectangle.h = 82;
-    
-    m_destinationRectangle.x = m_sourceRectangle.x = 0;
-    m_destinationRectangle.y = m_sourceRectangle.y = 0;
-    m_destinationRectangle.w = m_sourceRectangle.w;
-    m_destinationRectangle.h = m_sourceRectangle.h;
-    */
+    m_gameObjects.push_back( m_player );
+    m_gameObjects.push_back( m_enemy1 );
+    m_gameObjects.push_back( m_enemy2 );
+    m_gameObjects.push_back( m_enemy3 );
     
     
     
     m_bRunning = true;
     return true;
+  }
+  
+  void draw() {
+    for( std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++ ) {
+      m_gameObjects[i] -> draw( m_pRenderer );
+    }
   }
   
   void render() {

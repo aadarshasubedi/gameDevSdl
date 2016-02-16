@@ -19,7 +19,8 @@ class GameObject {
     int m_height;
 
   public:
-    void load( int x, int y, int width, int height, std::string textureID ) {
+    virtual void load( int x, int y, int width, int height, std::string textureID ) {
+      
       m_x = x;
       m_y = y;
       m_width = width;
@@ -28,6 +29,10 @@ class GameObject {
       
       m_currentRow = 1;
       m_currentFrame = 1;
+      
+      virtual void draw( SDL_Renderer* pRenderer );
+      virtual void update();
+      virtual void clean();
     }
     
     void draw( SDL_Renderer* pRenderer ) {
@@ -39,26 +44,6 @@ class GameObject {
     }
     void clean() {}
     
-};
-
-class Player : public GameObject {
-  public:
-    void load( int x, int y, int width, int height, std::string textureID ) {
-      GameObject::load( x, y, width, height, textureID );
-    }
-  
-    void draw( SDL_Renderer* pRenderer ) {
-      GameObject::draw( pRenderer );
-    }
-    
-    void update() {
-      m_x -+ 1;
-    }
-    
-    void clean() {
-      GameObject::clean();
-      cout << "clean player";
-    }
 };
 
 #endif //GAMEOBJECT_H
