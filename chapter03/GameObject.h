@@ -17,6 +17,7 @@ class GameObject {
     
     int m_width;
     int m_height;
+    std::vector<GameObject*>  m_gameObjects;
 
   public:
     virtual void load( int x, int y, int width, int height, std::string textureID ) {
@@ -30,13 +31,15 @@ class GameObject {
       m_currentRow = 1;
       m_currentFrame = 1;
       
-      virtual void draw( SDL_Renderer* pRenderer );
-      virtual void update();
-      virtual void clean();
+      
     }
     
     void draw( SDL_Renderer* pRenderer ) {
-      TextureManager::Instance() -> drawFrame( m_textureID, m_x, m_y, m_width, m_height, m_currentRow, m_currentFrame, pRenderer, SDL_FLIP_NONE );
+      for( std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++ ) {
+        m_gameObjects[i] -> draw( m_pRenderer );
+        
+      }
+      //TextureManager::Instance() -> drawFrame( m_textureID, m_x, m_y, m_width, m_height, m_currentRow, m_currentFrame, pRenderer, SDL_FLIP_NONE );
     }
     
     void update() {
