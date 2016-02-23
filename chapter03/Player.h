@@ -1,18 +1,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-//#include <iostream>
-//#include "TextureManager.h"
-//#include "GameObject.h"
-
-//using namespace std;
+#include "GameObject.h"
 
 class Player : public GameObject {
   public:
-    void load( int x, int y, int width, int height, std::string textureID ) {
+    void load( int x, int y, int width, int height, string textureID ) {
       GameObject::load( x, y, width, height, textureID );
     }
-  
+    
     void draw( SDL_Renderer* pRenderer ) {
       GameObject::draw( pRenderer );
     }
@@ -23,8 +19,8 @@ class Player : public GameObject {
     
     void clean() {
       GameObject::clean();
-      //cout << "clean player";
     }
+    
 };
 
 #endif //PLAYER_H
