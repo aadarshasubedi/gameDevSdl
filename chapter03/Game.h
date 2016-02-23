@@ -2,9 +2,10 @@
 #define GAME_H
 
 
-#include<iostream>
-#include<SDL2/SDL.h>
-#include<SDL2/SDL_image.h>
+#include <iostream>
+#include <vector>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Player.h"

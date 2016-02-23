@@ -1,9 +1,8 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include <iostream>
 #include "GameObject.h"
-
-using namespace std;
 
 class Enemy : public GameObject {
   public:
@@ -19,6 +18,7 @@ class Enemy : public GameObject {
       m_y += 1;
       m_x += 1;
       m_currentFrame = int( ( ( SDL_GetTicks() / 100 ) % 6 ) );
+      //cout << "current frame is " << m_currentFrame << endl;
       
     }
     

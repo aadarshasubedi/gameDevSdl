@@ -4,8 +4,6 @@
 #include <iostream>
 #include "TextureManager.h"
 
-using namespace std;
-
 class GameObject {
   protected:
     int m_x;
@@ -33,15 +31,16 @@ class GameObject {
       
     }
     
-    void update() {
+    virtual void update() {
       m_x += 1;
+      //cout << "in GameObject update - m_x = " << m_x << endl;
     }
     
-    void draw( SDL_Renderer* pRenderer ) {
+    virtual void draw( SDL_Renderer* pRenderer ) {
       TextureManager::Instance() -> drawFrame( m_textureID, m_x, m_y, m_width, m_height, m_currentRow, m_currentFrame, pRenderer, SDL_FLIP_NONE );
     }
     
-    void clean() {}
+    virtual void clean() {}
     
 };
 
