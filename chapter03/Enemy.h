@@ -1,13 +1,7 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-
-#include<iostream>
-#include<SDL2/SDL.h>
-#include<SDL2/SDL_image.h>
-//#include "TextureManager.h"
 #include "GameObject.h"
-//#include "Player.h"
 
 using namespace std;
 
@@ -30,7 +24,6 @@ class Enemy : public GameObject {
     
     void clean() {
       GameObject::clean();
-      //cout << "clean player";
     }
     
 };
