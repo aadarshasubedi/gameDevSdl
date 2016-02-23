@@ -17,20 +17,13 @@ private:
   SDL_Window*     m_pWindow;
   SDL_Renderer*   m_pRenderer;
   
-  int             m_currentFrame;
+  //int             m_currentFrame;
   
   bool            m_bRunning;
+  
   GameObject*     m_go;
   GameObject*     m_player;
   GameObject*     m_enemy;
-  //Player          m_player;
-  
-  GameObject*     m_player;
-  GameObject*     m_enemy1;
-  GameObject*     m_enemy2;
-  GameObject*     m_enemy3;
-  
-  
   
   std::vector<GameObject*>    m_gameObjects;
   
@@ -65,11 +58,15 @@ public:
       return false;
     }
     
-    m_go = new GameObject();
-    m_player = new Player;
+    if( !TextureManager::Instance() -> load( "assets/animate-alpha.png", "animate", m_pRenderer ) ) {
+      return false;
+    }
     
-    m_go -> load( 100, 100, 128, 82, "animate" );
-    m_player -> load( 300, 300, 128, 82, "animate" );
+    m_go = new GameObject();
+    m_player = new Player();
+    
+    m_go -> load( 100, 100, 128, 82, "animate" ); // sets the int x, int y, int width, int height, std::string textureID
+    m_player -> load( 300, 300, 128, 82, "animate" ); // sets the int x, int y, int width, int height, std::string textureID
     
     m_gameObjects.push_back( m_go );
     m_gameObjects.push_back( m_player );
@@ -78,55 +75,11 @@ public:
     m_enemy -> load( 0, 0, 128, 82, "animate" );
     m_gameObjects.push_back( m_enemy );
     
-    /*
-    if( !TextureManager::Instance() -> load( "assets/animate-alpha.png", "animate", m_pRenderer ) ) {
-      return false;
-    }
-    
-    m_go.load( 100, 100, 128, 82, "animate" );
-    m_player.load( 300, 300, 128, 82, "animate" );
-    
-    m_player = new Player();
-    m_enemy1 = new Enemy();
-    m_enemy2 = new Enemy();
-    m_enemy3 = new Enemy();
-    
-    m_gameObjects.push_back( m_player );
-    m_gameObjects.push_back( m_enemy1 );
-    m_gameObjects.push_back( m_enemy2 );
-    m_gameObjects.push_back( m_enemy3 );
-    */
-    
-    
     m_bRunning = true;
     return true;
   }
   
-  void draw() {
-    for( std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++ ) {
-      m_gameObjects[i] -> draw( m_pRenderer );
-    }
-  }
-  
-  void render() {
-    SDL_RenderClear( m_pRenderer );
-    
-    for( std::vector<GameObject*>::size_type i = 0; i!= m_gameObjects.size(); i++ ) {
-      m_gameObjects[i] -> draw( m_pRenderer );
-    }
-    //m_go.draw( m_pRenderer );
-    //m_player.draw( m_pRenderer );
-    
-    SDL_RenderPresent( m_pRenderer );
-  }
-  
-  void update() {
-    for( std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++ ) {
-      m_gameObjects[i] -> update();
-    }
-    //m_go.update();
-    //m_player.update();
-  }
+  bool running() { return m_bRunning;  } 
   
   void handleEvents() {
     SDL_Event event;
@@ -140,17 +93,35 @@ public:
     }
   }
   
+  void update() {
+    for( std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++ ) {
+      m_gameObjects[i] -> update();
+    }
+  }
+  
+  void render() {
+    SDL_RenderClear( m_pRenderer );
+    
+    for( std::vector<GameObject*>::size_type i = 0; i!= m_gameObjects.size(); i++ ) {
+      m_gameObjects[i] -> draw( m_pRenderer );
+    }
+    
+    SDL_RenderPresent( m_pRenderer );
+  }
+  
   void clean() {
     cout << "Killing SDL" << endl;
     SDL_DestroyWindow( m_pWindow );
     SDL_DestroyRenderer( m_pRenderer );
     SDL_Quit();
   }
-  
-  // a function to access the private running variable
-  bool running() {
-    return m_bRunning; 
-  } 
+  /*
+  void draw() {
+    for( std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++ ) {
+      m_gameObjects[i] -> draw( m_pRenderer );
+    }
+  }
+  */
 };
 
 #endif //GAME_H
