@@ -1,7 +1,7 @@
 #include "Game.h"
 
-int main( int argc, char* args[] ) {
-  Game* g_game = 0;
+int main() {
+  Game* g_game;
   g_game = new Game();
   
   g_game -> init( "Chapter 1", 100, 100, 640, 480, false );
@@ -14,7 +14,7 @@ int main( int argc, char* args[] ) {
     SDL_Delay( 10 );
   }
   
-  g_game->clean();
+  g_game -> clean();
   
   return 0;
 }
