@@ -5,7 +5,7 @@ using namespace std;
 
 int main( int argc, char* args[] ) {
   cout << "game init attempt..." << endl;
-  if( TheGame::Instance() -> init( "Chapter 3", 100, 100, 640, 480, false ) ) {
+  if( TheGame::Instance() -> init( "Chapter 4", 100, 100, 640, 480, false ) ) {
     cout << "game init success" << endl;
     while( TheGame::Instance() -> running() ) {
       TheGame::Instance() -> handleEvents();
